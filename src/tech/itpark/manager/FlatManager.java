@@ -15,7 +15,6 @@ public class FlatManager {
             nextId++;
             items.add(item);
         }
-        // TODO: handle update
     }
 
     public ArrayList<Flat> search(ArrayList<String> stations,
