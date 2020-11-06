@@ -1,16 +1,17 @@
 package tech.itpark.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Flat {
     private int id;
-    private ArrayList<String> stations = new ArrayList<>();
+    private List<String> stations = new ArrayList<>();
     private int price;
     private int floor;
     private int roomsAmount;
-    private ArrayList<String> districts;
+    private List<String> districts;
 
-    public Flat(int id, ArrayList<String> stations, int price, int floor, int room, ArrayList<String> districts) {
+    public Flat(int id, List<String> stations, int price, int floor, int room, List<String> districts) {
         this.id = id;
         this.stations = stations;
         this.price = price;
@@ -19,11 +20,11 @@ public class Flat {
         this.districts = districts;
     }
 
-    public Flat(ArrayList<String> stations) {
+    public Flat(List<String> stations) {
         this.stations = stations;
     }
 
-    public Flat(int id, ArrayList<String> stations) {
+    public Flat(int id, List<String> stations) {
         this.id = id;
         this.stations = stations;
     }
@@ -36,11 +37,11 @@ public class Flat {
         this.id = id;
     }
 
-    public ArrayList<String> getStations() {
+    public List<String> getStations() {
         return stations;
     }
 
-    public void setStations(ArrayList<String> stations) {
+    public void setStations(List<String> stations) {
         this.stations = stations;
     }
 
@@ -68,11 +69,11 @@ public class Flat {
         this.roomsAmount = roomsAmount;
     }
 
-    public ArrayList<String> getDistricts() {
+    public List<String> getDistricts() {
         return districts;
     }
 
-    public void setDistricts(ArrayList<String> districts) {
+    public void setDistricts(List<String> districts) {
         this.districts = districts;
     }
 }

@@ -3,10 +3,13 @@ package tech.itpark.manager;
 import tech.itpark.model.Flat;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FlatManager {
-    private ArrayList<Flat> items = new ArrayList<>();
+    private List<Flat> items = new ArrayList<>();
+
+
     private int nextId = 1;
 
     public void save(Flat item) {
@@ -17,47 +20,53 @@ public class FlatManager {
         }
     }
 
-    public ArrayList<Flat> search(ArrayList<String> stations,
-                                  ArrayList<String> districts,
-                                  int minPrice,
-                                  int maxPrice,
-                                  int roomsAmount,
-                                  int floor) {
-        ArrayList<Flat> result = new ArrayList<>();
+
+    public void update(Flat myFlat, int flatNumber) {
+        items.add(flatNumber, myFlat);
+    }
+
+    public List<Flat> search(List<String> stations,
+                             List<String> districts,
+                             int minPrice,
+                             int maxPrice,
+                             int roomsAmount,
+                             int floor) {
+        List<Flat> result = new ArrayList<>();
 
         for (Flat item : items) {
-            if (containsAny(item, stations, districts, minPrice, maxPrice, roomsAmount, floor)) {
+            if (matches(item, stations, districts, minPrice, maxPrice, roomsAmount, floor)) {
                 result.add(item);
             }
         }
         return result;
     }
 
-    private boolean containsAny(Flat item,
-                                ArrayList<String> stations,
-                                ArrayList<String> districts,
-                                int minPrice,
-                                int maxPrice,
-                                int roomsAmount,
-                                int floor) {
+    private boolean matches(Flat item,
+                            List<String> stations,
+                            List<String> districts,
+                            int minPrice,
+                            int maxPrice,
+                            int roomsAmount,
+                            int floor) {
+
+        boolean isStationFound = false;
         for (String station : item.getStations()) {
             if (stations.contains(station)) {
-                return true;
+                isStationFound = true;
             }
         }
+        boolean isDistrictFound = false;
         for (String district : item.getDistricts()) {
             if (districts.contains(district)) {
-                return true;
+                isDistrictFound = true;
             }
-
         }
-        if (item.getPrice() > minPrice && item.getPrice() < maxPrice) {
-            return true;
-        }
-        if (roomsAmount == item.getRoomsAmount()) {
-            return true;
-        }
-        if (floor == item.getFloor()) {
+        if (isStationFound
+                && isDistrictFound
+                && item.getPrice() > minPrice
+                && item.getPrice() < maxPrice
+                && roomsAmount == item.getRoomsAmount()
+                && floor == item.getFloor()) {
             return true;
         }
         return false;
